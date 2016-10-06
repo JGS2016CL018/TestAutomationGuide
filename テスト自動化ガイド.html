@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <title>テスト自動化ガイド</title>
+      <style>.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(171, 178, 191); overflow: auto; background-color: rgb(40, 44, 52); }
+.markdown-preview:not([data-use-github-style]) > :first-child { margin-top: 0px; }
+.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) h1 { font-size: 2.4em; font-weight: 300; }
+.markdown-preview:not([data-use-github-style]) h2 { font-size: 1.8em; font-weight: 400; }
+.markdown-preview:not([data-use-github-style]) h3 { font-size: 1.5em; font-weight: 500; }
+.markdown-preview:not([data-use-github-style]) h4 { font-size: 1.2em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h5 { font-size: 1.1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h6 { font-size: 1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) strong { color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) del { color: rgb(124, 135, 156); }
+.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(82, 139, 255); }
+.markdown-preview:not([data-use-github-style]) img { max-width: 100%; }
+.markdown-preview:not([data-use-github-style]) > p { margin-top: 0px; margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) > ul, .markdown-preview:not([data-use-github-style]) > ol { margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(124, 135, 156); border-color: rgb(75, 83, 98); border-width: 4px; }
+.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top-width: 2px; border-top-style: dashed; border-top-color: rgb(75, 83, 98); background: none; }
+.markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
+.markdown-preview:not([data-use-github-style]) th { color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(75, 83, 98); }
+.markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(58, 63, 75); }
+.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(49, 54, 63); }
+.markdown-preview:not([data-use-github-style]) kbd { color: rgb(255, 255, 255); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(75, 83, 98) rgb(75, 83, 98) rgb(62, 68, 81); background-color: rgb(58, 63, 75); }
+.markdown-preview[data-use-github-style] { font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); overflow: scroll; background-color: rgb(255, 255, 255); }
+.markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
+.markdown-preview[data-use-github-style] > :last-child { margin-bottom: 0px !important; }
+.markdown-preview[data-use-github-style] a:not([href]) { color: inherit; text-decoration: none; }
+.markdown-preview[data-use-github-style] .absent { color: rgb(204, 0, 0); }
+.markdown-preview[data-use-github-style] .anchor { position: absolute; top: 0px; left: 0px; display: block; padding-right: 6px; padding-left: 30px; margin-left: -30px; }
+.markdown-preview[data-use-github-style] .anchor:focus { outline: none; }
+.markdown-preview[data-use-github-style] h1, .markdown-preview[data-use-github-style] h2, .markdown-preview[data-use-github-style] h3, .markdown-preview[data-use-github-style] h4, .markdown-preview[data-use-github-style] h5, .markdown-preview[data-use-github-style] h6 { position: relative; margin-top: 1em; margin-bottom: 16px; font-weight: bold; line-height: 1.4; }
+.markdown-preview[data-use-github-style] h1 .octicon-link, .markdown-preview[data-use-github-style] h2 .octicon-link, .markdown-preview[data-use-github-style] h3 .octicon-link, .markdown-preview[data-use-github-style] h4 .octicon-link, .markdown-preview[data-use-github-style] h5 .octicon-link, .markdown-preview[data-use-github-style] h6 .octicon-link { display: none; color: rgb(0, 0, 0); vertical-align: middle; }
+.markdown-preview[data-use-github-style] h1:hover .anchor, .markdown-preview[data-use-github-style] h2:hover .anchor, .markdown-preview[data-use-github-style] h3:hover .anchor, .markdown-preview[data-use-github-style] h4:hover .anchor, .markdown-preview[data-use-github-style] h5:hover .anchor, .markdown-preview[data-use-github-style] h6:hover .anchor { padding-left: 8px; margin-left: -30px; text-decoration: none; }
+.markdown-preview[data-use-github-style] h1:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h2:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h3:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h4:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h5:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h6:hover .anchor .octicon-link { display: inline-block; }
+.markdown-preview[data-use-github-style] h1 tt, .markdown-preview[data-use-github-style] h2 tt, .markdown-preview[data-use-github-style] h3 tt, .markdown-preview[data-use-github-style] h4 tt, .markdown-preview[data-use-github-style] h5 tt, .markdown-preview[data-use-github-style] h6 tt, .markdown-preview[data-use-github-style] h1 code, .markdown-preview[data-use-github-style] h2 code, .markdown-preview[data-use-github-style] h3 code, .markdown-preview[data-use-github-style] h4 code, .markdown-preview[data-use-github-style] h5 code, .markdown-preview[data-use-github-style] h6 code { font-size: inherit; }
+.markdown-preview[data-use-github-style] h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h1 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h2 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h3 { font-size: 1.5em; line-height: 1.43; }
+.markdown-preview[data-use-github-style] h3 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h4 { font-size: 1.25em; }
+.markdown-preview[data-use-github-style] h4 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h5 { font-size: 1em; }
+.markdown-preview[data-use-github-style] h5 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] h6 { font-size: 1em; color: rgb(119, 119, 119); }
+.markdown-preview[data-use-github-style] h6 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] p, .markdown-preview[data-use-github-style] blockquote, .markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol, .markdown-preview[data-use-github-style] dl, .markdown-preview[data-use-github-style] table, .markdown-preview[data-use-github-style] pre { margin-top: 0px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] hr { height: 4px; padding: 0px; margin: 16px 0px; border: 0px none; background-color: rgb(231, 231, 231); }
+.markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol { padding-left: 2em; }
+.markdown-preview[data-use-github-style] ul.no-list, .markdown-preview[data-use-github-style] ol.no-list { padding: 0px; list-style-type: none; }
+.markdown-preview[data-use-github-style] ul ul, .markdown-preview[data-use-github-style] ul ol, .markdown-preview[data-use-github-style] ol ol, .markdown-preview[data-use-github-style] ol ul { margin-top: 0px; margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] li > p { margin-top: 16px; }
+.markdown-preview[data-use-github-style] dl { padding: 0px; }
+.markdown-preview[data-use-github-style] dl dt { padding: 0px; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: bold; }
+.markdown-preview[data-use-github-style] dl dd { padding: 0px 16px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] blockquote { padding: 0px 15px; color: rgb(119, 119, 119); border-left-width: 4px; border-left-style: solid; border-left-color: rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] blockquote > :first-child { margin-top: 0px; }
+.markdown-preview[data-use-github-style] blockquote > :last-child { margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] table { display: block; width: 100%; overflow: auto; word-break: keep-all; }
+.markdown-preview[data-use-github-style] table th { font-weight: bold; }
+.markdown-preview[data-use-github-style] table th, .markdown-preview[data-use-github-style] table td { padding: 6px 13px; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] table tr { border-top-width: 1px; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: rgb(255, 255, 255); }
+.markdown-preview[data-use-github-style] table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+.markdown-preview[data-use-github-style] img { max-width: 100%; box-sizing: border-box; }
+.markdown-preview[data-use-github-style] .emoji { max-width: none; }
+.markdown-preview[data-use-github-style] span.frame { display: block; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.frame > span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0px 0px; overflow: hidden; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] span.frame span img { display: block; float: left; }
+.markdown-preview[data-use-github-style] span.frame span span { display: block; padding: 5px 0px 0px; clear: both; color: rgb(51, 51, 51); }
+.markdown-preview[data-use-github-style] span.align-center { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-center > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-center span img { margin: 0px auto; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-right { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-right > span { display: block; margin: 13px 0px 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] span.align-right span img { margin: 0px; text-align: right; }
+.markdown-preview[data-use-github-style] span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-left span { margin: 13px 0px 0px; }
+.markdown-preview[data-use-github-style] span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-right > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] code, .markdown-preview[data-use-github-style] tt { padding: 0.2em 0px; margin: 0px; font-size: 85%; border-radius: 3px; background-color: rgba(0, 0, 0, 0.0392157); }
+.markdown-preview[data-use-github-style] code::before, .markdown-preview[data-use-github-style] tt::before, .markdown-preview[data-use-github-style] code::after, .markdown-preview[data-use-github-style] tt::after { letter-spacing: -0.2em; content: " "; }
+.markdown-preview[data-use-github-style] code br, .markdown-preview[data-use-github-style] tt br { display: none; }
+.markdown-preview[data-use-github-style] del code { text-decoration: inherit; }
+.markdown-preview[data-use-github-style] pre > code { padding: 0px; margin: 0px; font-size: 100%; word-break: normal; white-space: pre; border: 0px; background: transparent; }
+.markdown-preview[data-use-github-style] .highlight { margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] .highlight pre, .markdown-preview[data-use-github-style] pre { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; border-radius: 3px; background-color: rgb(247, 247, 247); }
+.markdown-preview[data-use-github-style] .highlight pre { margin-bottom: 0px; word-break: normal; }
+.markdown-preview[data-use-github-style] pre { word-wrap: normal; }
+.markdown-preview[data-use-github-style] pre code, .markdown-preview[data-use-github-style] pre tt { display: inline; max-width: initial; padding: 0px; margin: 0px; overflow: initial; line-height: inherit; word-wrap: normal; border: 0px; background-color: transparent; }
+.markdown-preview[data-use-github-style] pre code::before, .markdown-preview[data-use-github-style] pre tt::before, .markdown-preview[data-use-github-style] pre code::after, .markdown-preview[data-use-github-style] pre tt::after { content: normal; }
+.markdown-preview[data-use-github-style] kbd { display: inline-block; padding: 3px 5px; font-size: 11px; line-height: 10px; color: rgb(85, 85, 85); vertical-align: middle; border-style: solid; border-width: 1px; border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(187, 187, 187); border-radius: 3px; box-shadow: rgb(187, 187, 187) 0px -1px 0px inset; background-color: rgb(252, 252, 252); }
+.markdown-preview[data-use-github-style] a { color: rgb(51, 122, 183); }
+.markdown-preview[data-use-github-style] code { color: inherit; }
+.markdown-preview[data-use-github-style] pre.editor-colors { padding: 0.8em 1em; margin-bottom: 1em; font-size: 0.85em; border-radius: 4px; overflow: auto; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors::shadow .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors::shadow .horizontal-scrollbar { visibility: hidden; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors:hover::shadow .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors:hover::shadow .horizontal-scrollbar { visibility: visible; }
+.bracket-matcher .region {
+  border-bottom: 1px dotted lime;
+  position: absolute;
+}
+
+.spell-check-misspelling .region {
+  border-bottom: 2px dotted rgba(255, 51, 51, 0.75);
+}
+
+pre.editor-colors,
+.host {
+  background-color: #282c34;
+  color: #abb2bf;
+}
+pre.editor-colors .line.cursor-line,
+.host .line.cursor-line {
+  background-color: rgba(153, 187, 255, 0.04);
+}
+pre.editor-colors .invisible,
+.host .invisible {
+  color: #abb2bf;
+}
+pre.editor-colors .cursor,
+.host .cursor {
+  border-left: 2px solid #528bff;
+}
+pre.editor-colors .selection .region,
+.host .selection .region {
+  background-color: #3e4451;
+}
+pre.editor-colors .bracket-matcher .region,
+.host .bracket-matcher .region {
+  border-bottom: 1px solid #528bff;
+  box-sizing: border-box;
+}
+pre.editor-colors .invisible-character,
+.host .invisible-character {
+  color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .indent-guide,
+.host .indent-guide {
+  color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .wrap-guide,
+.host .wrap-guide {
+  background-color: rgba(171, 178, 191, 0.15);
+}
+pre.editor-colors .gutter .line-number,
+.host .gutter .line-number {
+  color: #636d83;
+  -webkit-font-smoothing: antialiased;
+}
+pre.editor-colors .gutter .line-number.cursor-line,
+.host .gutter .line-number.cursor-line {
+  color: #abb2bf;
+  background-color: #2c313a;
+}
+pre.editor-colors .gutter .line-number.cursor-line-no-selection,
+.host .gutter .line-number.cursor-line-no-selection {
+  background-color: transparent;
+}
+pre.editor-colors .gutter .line-number .icon-right,
+.host .gutter .line-number .icon-right {
+  color: #abb2bf;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before,
+.host .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before {
+  bottom: -3px;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed::after,
+.host .gutter:not(.git-diff-icon) .line-number.git-line-removed::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 25px;
+  border-bottom: 1px dotted rgba(224, 82, 82, 0.5);
+  pointer-events: none;
+}
+pre.editor-colors .gutter .line-number.folded,
+.host .gutter .line-number.folded,
+pre.editor-colors .gutter .line-number:after,
+.host .gutter .line-number:after,
+pre.editor-colors .fold-marker:after,
+.host .fold-marker:after {
+  color: #abb2bf;
+}
+.comment {
+  color: #5c6370;
+  font-style: italic;
+}
+.comment .markup.link {
+  color: #5c6370;
+}
+.entity.name.type {
+  color: #e5c07b;
+}
+.entity.other.inherited-class {
+  color: #98c379;
+}
+.keyword {
+  color: #c678dd;
+}
+.keyword.control {
+  color: #c678dd;
+}
+.keyword.operator {
+  color: #abb2bf;
+}
+.keyword.other.special-method {
+  color: #61afef;
+}
+.keyword.other.unit {
+  color: #d19a66;
+}
+.storage {
+  color: #c678dd;
+}
+.storage.type.annotation,
+.storage.type.primitive {
+  color: #c678dd;
+}
+.storage.modifier.package,
+.storage.modifier.import {
+  color: #abb2bf;
+}
+.constant {
+  color: #d19a66;
+}
+.constant.variable {
+  color: #d19a66;
+}
+.constant.character.escape {
+  color: #56b6c2;
+}
+.constant.numeric {
+  color: #d19a66;
+}
+.constant.other.color {
+  color: #56b6c2;
+}
+.constant.other.symbol {
+  color: #56b6c2;
+}
+.variable {
+  color: #e06c75;
+}
+.variable.interpolation {
+  color: #be5046;
+}
+.variable.parameter {
+  color: #abb2bf;
+}
+.string {
+  color: #98c379;
+}
+.string.regexp {
+  color: #56b6c2;
+}
+.string.regexp .source.ruby.embedded {
+  color: #e5c07b;
+}
+.string.other.link {
+  color: #e06c75;
+}
+.punctuation.definition.comment {
+  color: #5c6370;
+}
+.punctuation.definition.method-parameters,
+.punctuation.definition.function-parameters,
+.punctuation.definition.parameters,
+.punctuation.definition.separator,
+.punctuation.definition.seperator,
+.punctuation.definition.array {
+  color: #abb2bf;
+}
+.punctuation.definition.heading,
+.punctuation.definition.identity {
+  color: #61afef;
+}
+.punctuation.definition.bold {
+  color: #e5c07b;
+  font-weight: bold;
+}
+.punctuation.definition.italic {
+  color: #c678dd;
+  font-style: italic;
+}
+.punctuation.section.embedded {
+  color: #be5046;
+}
+.punctuation.section.method,
+.punctuation.section.class,
+.punctuation.section.inner-class {
+  color: #abb2bf;
+}
+.support.class {
+  color: #e5c07b;
+}
+.support.type {
+  color: #56b6c2;
+}
+.support.function {
+  color: #56b6c2;
+}
+.support.function.any-method {
+  color: #61afef;
+}
+.entity.name.function {
+  color: #61afef;
+}
+.entity.name.class,
+.entity.name.type.class {
+  color: #e5c07b;
+}
+.entity.name.section {
+  color: #61afef;
+}
+.entity.name.tag {
+  color: #e06c75;
+}
+.entity.other.attribute-name {
+  color: #d19a66;
+}
+.entity.other.attribute-name.id {
+  color: #61afef;
+}
+.meta.class {
+  color: #e5c07b;
+}
+.meta.class.body {
+  color: #abb2bf;
+}
+.meta.method-call,
+.meta.method {
+  color: #abb2bf;
+}
+.meta.definition.variable {
+  color: #e06c75;
+}
+.meta.link {
+  color: #d19a66;
+}
+.meta.require {
+  color: #61afef;
+}
+.meta.selector {
+  color: #c678dd;
+}
+.meta.separator {
+  background-color: #373b41;
+  color: #abb2bf;
+}
+.meta.tag {
+  color: #abb2bf;
+}
+.underline {
+  text-decoration: underline;
+}
+.none {
+  color: #abb2bf;
+}
+.invalid.deprecated {
+  color: #523d14 !important;
+  background-color: #e0c285 !important;
+}
+.invalid.illegal {
+  color: #ffffff !important;
+  background-color: #e05252 !important;
+}
+.markup.bold {
+  color: #d19a66;
+  font-weight: bold;
+}
+.markup.changed {
+  color: #c678dd;
+}
+.markup.deleted {
+  color: #e06c75;
+}
+.markup.italic {
+  color: #c678dd;
+  font-style: italic;
+}
+.markup.heading {
+  color: #e06c75;
+}
+.markup.heading .punctuation.definition.heading {
+  color: #61afef;
+}
+.markup.link {
+  color: #c678dd;
+}
+.markup.inserted {
+  color: #98c379;
+}
+.markup.quote {
+  color: #d19a66;
+}
+.markup.raw {
+  color: #98c379;
+}
+.source.cs .keyword.operator {
+  color: #c678dd;
+}
+.source.css .property-name,
+.source.css .property-value {
+  color: #828997;
+}
+.source.css .property-name.support,
+.source.css .property-value.support {
+  color: #abb2bf;
+}
+.source.gfm .markup {
+  -webkit-font-smoothing: auto;
+}
+.source.gfm .link .entity {
+  color: #61afef;
+}
+.source.ini .keyword.other.definition.ini {
+  color: #e06c75;
+}
+.source.java .storage.modifier.import {
+  color: #e5c07b;
+}
+.source.java .storage.type {
+  color: #e5c07b;
+}
+.source.java-properties .meta.key-pair {
+  color: #e06c75;
+}
+.source.java-properties .meta.key-pair > .punctuation {
+  color: #abb2bf;
+}
+.source.js .keyword.operator {
+  color: #56b6c2;
+}
+.source.js .keyword.operator.delete,
+.source.js .keyword.operator.in,
+.source.js .keyword.operator.of,
+.source.js .keyword.operator.instanceof,
+.source.js .keyword.operator.new,
+.source.js .keyword.operator.typeof,
+.source.js .keyword.operator.void {
+  color: #c678dd;
+}
+.source.json .meta.structure.dictionary.json > .string.quoted.json {
+  color: #e06c75;
+}
+.source.json .meta.structure.dictionary.json > .string.quoted.json > .punctuation.string {
+  color: #e06c75;
+}
+.source.json .meta.structure.dictionary.json > .value.json > .string.quoted.json,
+.source.json .meta.structure.array.json > .value.json > .string.quoted.json,
+.source.json .meta.structure.dictionary.json > .value.json > .string.quoted.json > .punctuation,
+.source.json .meta.structure.array.json > .value.json > .string.quoted.json > .punctuation {
+  color: #98c379;
+}
+.source.json .meta.structure.dictionary.json > .constant.language.json,
+.source.json .meta.structure.array.json > .constant.language.json {
+  color: #56b6c2;
+}
+.source.ruby .constant.other.symbol > .punctuation {
+  color: inherit;
+}
+.source.python .keyword.operator.logical.python {
+  color: #c678dd;
+}
+.source.python .variable.parameter {
+  color: #d19a66;
+}
+</style>
+  </head>
+  <body class='markdown-preview' data-use-github-style><h1 id="-">テスト自動化ガイド</h1>
+<h2 id="-">目次</h2>
+<ol>
+<li>テスト自動化の心得</li>
+<li>テスト自動化対象の選定<ol>
+<li>「効くところ」を見極める(定量面)</li>
+<li>「効くところ」を見極める(定性面)</li>
+</ol>
+</li>
+<li>テスト自動化の実装方式<ol>
+<li>テスト自動化推奨モデル</li>
+<li>モデル毎の実装方式</li>
+</ol>
+</li>
+<li>テスト自動化の参考書籍・サイト<ol>
+<li>テスト自動化の必要性・メリット・デメリットについて</li>
+<li>体系的・網羅的な知識を得たい</li>
+<li>どんなテストツールがあるか知りたい</li>
+<li>テスト自動化に取り組んでいるものの上手くいっていない</li>
+<li>テスト自動化について勉強したい</li>
+</ol>
+</li>
+</ol>
+<h2 id="-">本ガイドの対象読者チェック</h2>
+<p>本ガイドは以下の質問に対し、全て「Yes」と回答出来る方を対象としています。</p>
+<ul>
+<li>対象システムがWebですか？</li>
+<li>開発端末、サーバにSeleniumなどの自動化ソフトの導入が可能ですか？</li>
+<li>サンプルコードを参照しながら、プログラミングを行うことが可能ですか？</li>
+<li>テスト自動化に対する熱意はありますか？</li>
+<li>担当業務が忙しすぎませんか？</li>
+</ul>
+<h2 id="-">本ガイドの目的</h2>
+<p>テスト自動化をしようとしている人に対して、目的や対象となるシステム・機能に応じた、おススメのテスト自動化プランを提案します。</p>
+<h2 id="1-">1. テスト自動化の心得</h2>
+<p>テスト自動化を行うにあたり、各種論文や研究発表において語られている、おさえておくべきポイントのうち、代表的なものを記述します。</p>
+<ol>
+<li>テスト自動化でコストは下がらない<ul>
+<li>コストが下がるのはテスト実行部分のみ</li>
+<li>テスト準備やテストスクリプトのメンテナンスなどのコストが発生する</li>
+</ul>
+</li>
+<li>効果が出やすいおいしいところ(効くところ)を優先して自動化する<ul>
+<li>全てを100%自動化する必要はない (完全な自動化にこだわらず、手動テストと自動テスト、それぞれの良いところを活かす)</li>
+<li>投資対効果を意識して、自動化するテストに優先順位を付ける</li>
+</ul>
+</li>
+<li>自動化しやすいシステム設計・実装を心がける<ul>
+<li>HTMLタグにIDを振る</li>
+<li>機能を疎結合にする</li>
+<li>デバッグしやすくする</li>
+</ul>
+</li>
+<li>自動化対象はテスト以外にも存在する<ul>
+<li>ビルド、デプロイなど、テスト以外の部分の自動化も効果あり</li>
+<li>テストの一部分だけを自動化するのもあり (実行 → 結果取得 → 検証 のうち、実行だけを自動化するなど)</li>
+</ul>
+</li>
+</ol>
+<h4 id="-">自動テストと手動テストのコスト比較</h4>
+<h5 id="-">コスト構造</h5>
+<ol>
+<li>自動テストの場合のコスト<ol>
+<li>テストスクリプト作成・修正 (初期コスト)</li>
+<li>テスト実行 (実質コストゼロ)</li>
+<li>テスト結果検証 (テスト実行の都度発生するコスト)</li>
+<li>問題発生時の調査・デバッグ (問題発生時に発生するコスト)</li>
+</ol>
+</li>
+<li><p>手動テストの場合のコスト</p>
+<ol>
+<li>テスト実行 (テスト実行の都度発生するコスト)</li>
+<li>テスト結果検証 (テスト実行の都度発生するコスト)</li>
+<li>問題発生時の調査・デバッグ (問題発生時に発生するコスト)</li>
+</ol>
+</li>
+<li><p>自動テストのコスト = [1.1] + [1.3] × テスト実行回数 + [1.4] × 問題発生回数</p>
+</li>
+<li>手動テストのコスト = ( [2.1] + [2.2] ) × テスト実行回数 + [2.3] × 問題発生回数</li>
+</ol>
+<h5 id="-">簡易的な計算式</h5>
+<p>自動テストも手動テストも、テスト結果検証([1.3], [2.2])、問題発生時の調査・デバッグ([1.4], [2.3])のコストに大差がないと仮定した場合</p>
+<ul>
+<li>[1.1]自動テストのテストスクリプト作成・修正 &lt; [2.1]手動テストのテスト実行 × テスト実行回数</li>
+</ul>
+<p>という式が成立すれば、テスト自動化で元が取れることになります。<br>以下の条件が満たせるかがポイントになると言えます。</p>
+<ul>
+<li>[1.1]自動テストのテストスクリプト作成・修正のコストが低い</li>
+<li>[2.1]手動テストのテスト実行の実行回数が多い</li>
+</ul>
+<h5 id="-">留意点</h5>
+<ul>
+<li><p>テストスクリプト作成・修正のコストについて<br>テスト自動化に取り組み始めた時期は、この部分のコストが高くなりがちです。<br>経験や慣れで中長期的にコストが平準化していく部分もあるので、あせらずに進めましょう。<br>標準化やコーディング規約の整備により、保守性を高めコストを下げることも可能です。余裕があれば検討して下さい。</p>
+</li>
+<li><p>テスト結果検証、調査・デバッグのコストについて<br>手動テストの場合、テストが失敗したことに、そのタイミングで気付くことができます。<br>自動テストが失敗した場合は、テスト結果のみを情報源として、どこで失敗したのか？原因はなにか？を調査する必要があります。<br>自動テストの結果として、適切な情報が残っていない場合、原因調査・デバッグに手動テスト以上に時間がかかる場合もあります。</p>
+</li>
+</ul>
+<h2 id="2-">2. テスト自動化対象の選定</h2>
+<p>スモールスタートを意識して、テスト自動化の対象範囲(画面・機能・テスト内容)を検討しましょう。<br>100%自動化は将来の夢と割り切り、できるところから自動化を始めて、ノウハウ・成功事例を蓄積しつつ、少しずつ自動化の範囲を広げていきましょう。<br>この章では、テスト自動化の対象範囲を絞り込む際のヒントを提示します。<br>できれば、テスト自動化対象システムの画面・機能の一覧表などを用意してから、以下の内容を参照してください。</p>
+<h3 id="1-">1. 「効くところ」を見極める(定量面)</h3>
+<p>テスト自動化の心得として記載した、「効くところ」とは、具体的にはどういうところでしょう？<br>代表例は以下のような投資対効果の高いところです。少ない投資で高い効果を得ることが期待できます。</p>
+<ul>
+<li>簡単に自動化できるところ(操作が単純でスクリプト化が簡単なもの)</li>
+<li>繰り返し実行するところ(回帰テスト、クロスブラウザテスト、同一のシナリオに対して複数データでテストをする場合など)</li>
+</ul>
+<p>逆に、以下のようなところでは、自動化による効果を得ることは困難です。</p>
+<ul>
+<li>成功・失敗を機械的に判断することが難しい(画面表示のズレなど、人が目視で確認しなければ気付けない。)</li>
+<li>仕様が確定していない(スクリプトを頻繁に修正しなければならない。スクリプトによる自動テストが安定しない。)</li>
+<li>1回しか実行しないテスト</li>
+<li>利用頻度の低い機能</li>
+</ul>
+<h3 id="2-">2. 「効くところ」を見極める(定性面)</h3>
+<p>定量的な投資対効果では測ることができない自動化の効果もあります。<br>例えば、手間がかかる作業を自動化することができれば、<br>現場のメンバーのモチベーションアップ、生産性向上など、定性的な面での様々な効果が期待できます。  </p>
+<p>以下の質問内容に該当する場合は、後述する推奨モデルを適用することで、効果的なテスト自動化ができると期待できます。</p>
+<table>
+<thead>
+<tr>
+<th>質問内容</th>
+<th>推奨モデル</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>いつも同じような打鍵をしている。</td>
+<td>1, 2</td>
+</tr>
+<tr>
+<td>クロスブラウザテストで同じ作業を繰り返す。</td>
+<td>7, 9</td>
+</tr>
+<tr>
+<td>エビデンスの取得が大変（種類・残し方）。</td>
+<td>3</td>
+</tr>
+<tr>
+<td>データパターンが多く、テスト打鍵のボリュームが多い。</td>
+<td>4</td>
+</tr>
+<tr>
+<td>回帰テストのパターンが多く、手間がかかる。</td>
+<td>5, 8</td>
+</tr>
+<tr>
+<td>画面遷移がパターンが多い。</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-">3. テスト自動化の実装方式</h2>
+<p>テスト自動化の実装方式については、インターネット上で様々な情報を得ることができます。<br>この章では、代表的なテスト自動化パターンを推奨モデルとして提示するとともに、実装方式についてヒントとなる事例を紹介します。</p>
+<h3 id="1-">1. テスト自動化推奨モデル</h3>
+<p>テスト自動化を「効くところ」に適用する場合の、推奨モデルについて例示します。</p>
+<ul>
+<li>CR … キャプチャ＆リプレイ</li>
+<li>PO … ページオブジェクト</li>
+<li>DD … データドリブン</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>対象画面</th>
+<th>推奨モデル</th>
+<th>説明</th>
+<th style="text-align:center">難易度</th>
+<th style="text-align:center">サンプル</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>単一画面</td>
+<td>データを入力するだけのCR</td>
+<td>テストデータを作る際の補助ツールとして</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td>デフォルトバリューでのPO</td>
+<td>1の保守性を高めたい場合はPO化も</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">有</td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td>エビデンスを取得するだけのPO</td>
+<td>登録処理前後のエビデンス(画面ショット・DBダンプ)を取得する便利ツール</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">有</td>
+</tr>
+<tr>
+<td>4</td>
+<td></td>
+<td>データファイルを用意してDD＆PO</td>
+<td>データ項目・データパターンが多い画面を限定的に</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">有</td>
+</tr>
+<tr>
+<td>5</td>
+<td>複数画面</td>
+<td>シナリオテストをCR</td>
+<td>スモークテストをサクッと</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td></td>
+<td>特定の画面までの遷移をバッチ化して、ちょっと便利に</td>
+<td style="text-align:center">低</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>7</td>
+<td></td>
+<td></td>
+<td>クロスブラウザテストを(使い捨てでも良い派)</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>8</td>
+<td></td>
+<td></td>
+<td>ストレートコンバージョン、ファームウェア・ミドルウェア更新時の無影響確認(新旧比較)</td>
+<td style="text-align:center">中</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>9</td>
+<td></td>
+<td>シナリオテストをPO</td>
+<td>クロスブラウザテストを(ちゃんと保守していきたい派)</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<h6 id="-">細かく検討する余裕がない場合は、とりあえずこれ</h6>
+<ul>
+<li>手動打鍵でテストをする際に、Seleniumで記録する（推奨モデル #5）<ul>
+<li>「ログイン」「テスト対象画面への遷移」「テスト対象画面での打鍵」など、シナリオを細かく分けて記録しておくと、再利用し易くなる</li>
+</ul>
+</li>
+<li>データ項目・データパターンが多い、登録系画面についてはDD&amp;POで作り込む(推奨モデル #4)</li>
+<li>それ以外のテストについては、CRでサクッと(推奨モデル #1)</li>
+<li>繰り返し使う、且つ、保守していきたいテストについて優先順位をつけてPOで書き換えていく</li>
+</ul>
+<h3 id="2-">2. モデル毎の実装方式</h3>
+<table>
+<thead>
+<tr>
+<th>No.1</th>
+<th>データを入力するだけのキャプチャ＆リプレイ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>低(★☆☆)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>対象画面へのデータ入力を自動化するスクリプトを、キャプチャ＆リプレイで実装する。最初に手動テストをする際に、Firefox(Selenium IDE)で操作を記録してスクリプトを作成する。</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>対象画面を開いた状態でスクリプトを実行し、テストデータの入力に限定して自動化する。スクリプトはあくまで補助的に利用することが前提。スクリプト実行後に、必要な項目を手動で変更しテストを実行する。(デフォルトバリューパターンに近いイメージ)</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>登録系画面</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>キャプチャ＆リプレイは、操作を記録して作成したスクリプトを、そのまま利用できるという点がメリット。複雑な処理を記述したい場合は、プログラミング言語で実装した方が良い。([Selenium IDE]での記述方式を学習するコストが新たに発生してしまうのを避ける)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.2</th>
+<th>デフォルトバリューでのページオブジェクト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>中(★★☆)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>No.1のスクリプトを[Selenium IDE]の機能でプログラムコードに変換する。jarファイル化して、バッチファイルをダブルクリックして実行できるようにすると、更に便利に。</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>No.1とほぼ同様。プログラミングすることで、＋α(スクリーンショットを取得するなど)の機能を追加することもできる。</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>登録系画面</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>一定のプログラミングスキル・クラス設計スキルが求められるため、中級者以上の方向け。ページオブジェクトの設計方針・設計思想を統一しておくと、保守コストを低く抑えることが可能。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.3</th>
+<th>エビデンスを取得するだけのページオブジェクト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>中(★★☆)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>「登録前の画面のスクリーンショットを取得 → 登録ボタン押下 → 登録後の画面のスクリーンショットを取得 → DB・テーブルの内容を取得」 など、エビデンス取得の一連の操作をスクリプト化。ライブラリ化して、バッチファイルをダブルクリックして実行できるようにすると、更に便利に。</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>画面へのデータ入力は手動(あるいはNo.1, 2のスクリプトを利用)で行い、その後の定型的な操作をスクリプトで実行する。エビデンスの取得漏れを防止し、取得ルール(命名規則・フォーマット)を順守させることができる。</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>登録系画面</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>No.2と同様。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.4</th>
+<th>データドリブン＆ページオブジェクト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>中(★★★★)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>入力項目が多い登録系画面について、データ入力・登録・エビデンス取得などの一連の操作をページオブジェクトで実装。</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>入力データのバリエーションを変えて、同じ操作を行う場合に有効。入力データをExcel等で用意し、繰り返し登録し続けるイメージ。大量のテストデータを仕込む場合などにも利用可能であり、応用が利く実装方式です。</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>登録系画面</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.5</th>
+<th>シナリオテストをキャプチャ＆リプレイ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>低(★☆☆)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>スモークテスト(プログラムの主要機能が動くかどうかの最低限のテスト)を、キャプチャ＆リプレイで実装する。広く浅く、単純な基本操作(システム起動、画面遷移、ボタン・リンククリック操作など)を、Firefox(Selenium IDE)で記録してスクリプトを作成する。</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>参照系画面</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>ビルドしたソフトウェアをテスト環境に展開する前にスクリプトを実行し、最低限の操作(システムが起動する、主要機能が動作する)が可能な状態であることを確認する。そもそも動かない(テストにならない)ソフトウェアがテスト環境に展開されることを防ぎ、テストの効率化を実現する。</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.6</th>
+<th>特定の画面までの遷移をバッチ化して、ちょっと便利に</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>低(★☆☆)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>特定の画面までの遷移をキャプチャ＆リプレイで実装する。ライブラリ化して、バッチファイルをダブルクリックして実行できるようにすると、更に便利に。</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>複数の画面を経由しないと辿り着かない画面や、よくある画面遷移のパターンをスクリプト化して、手動作業を軽減します。</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>参照系画面</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.7</th>
+<th>クロスブラウザテストをキャプチャ＆リプレイで</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>中(★★☆)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>対象画面のテストスクリプトを、キャプチャ＆リプレイで実装する。最初に手動テストをする際に、Firefox(Selenium IDE)で操作を記録してスクリプトを作成する。</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>クロスブラウザテストは必ず2回以上は同じ作業を繰り返すことになります。初回のテストをキャプチャして、そのスクリプトを利用してテストを行うことで、高い投資対効果が期待できます。</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>参照系画面</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.8</th>
+<th>無影響確認テスト(新旧比較)をキャプチャ＆リプレイで</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>中(★★☆)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>無影響確認テスト(新旧比較)のスクリプトを、キャプチャ＆リプレイで実装する。最初に手動テストをする際に、Firefox(Selenium IDE)で操作を記録してスクリプトを作成する。</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>無影響確認テスト(新旧比較)は必ず2回以上は同じ作業を繰り返すことになります。初回のテストをキャプチャして、そのスクリプトを利用してテストを行うことで、高い投資対効果を得られると期待できます。</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>参照系画面</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.9</th>
+<th>クロスブラウザテストをページオブジェクトで</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>難易度</td>
+<td>高(★★★)</td>
+</tr>
+<tr>
+<td>実装方式</td>
+<td>No.5～8のスクリプトを[Selenium IDE]の機能でプログラムコードに変換する。</td>
+</tr>
+<tr>
+<td>利用イメージ</td>
+<td>複数回利用するスクリプトの場合は、ページオブジェクトパターンで実装し、保守性を高めることも検討してみましょう。</td>
+</tr>
+<tr>
+<td>推奨画面</td>
+<td>参照系画面</td>
+</tr>
+<tr>
+<td>留意点</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-">4. テスト自動化の参考書籍・サイト</h2>
+<p>この章では、テスト自動化に取り組む際に必要となる、有益な情報・ヒントを与えてくれる書籍・サイトを紹介します。<br>テスト自動化については、優れた先駆者による数多くの研究成果が残されており、ここで紹介する書籍・サイトは、そうした研究成果のごく一部です。<br>ご自身の知りたいテーマについて学習し、テスト自動化についての理解を深めるきっかけになれば幸いです。</p>
+<h4 id="1-">1. テスト自動化の必要性・メリット・デメリットについて</h4>
+<table>
+<thead>
+<tr>
+<th>No.1</th>
+<th>「なぜテスト自動化が必要なのか？」</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>テスト自動化の必要性・メリット・注意点について、簡潔・明瞭・的確にわかりやすく語られています(わずか3ページの記事ですが必要十分です)。「なぜテスト自動化が必要なのか？」について、自信を持って語れない方は、ぜひご一読ください。<br>※全文を参照するには無料会員登録が必要ですが、本連載に限らず、他にも参考になる記事が多いので、この機会に登録することをお薦めします。</td>
+</tr>
+<tr>
+<td>サイト</td>
+<td>実践！テスト自動化の勘所 ～ テスト自動化とツールの導入 [ITpro]</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20120919/423474/">http://itpro.nikkeibp.co.jp/article/COLUMN/20120919/423474/</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-">2. 体系的・網羅的な知識を得たい</h4>
+<table>
+<thead>
+<tr>
+<th>No.2</th>
+<th>1時間でわかるSTA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>「システムテスト自動化 標準ガイド」を紹介しつつ、エッセンスとなる情報を盛り込んだ資料。タイトル通り&quot;1時間でわか(った気になれ)る&quot;資料なので、まずはこの資料に目を通してみることをお薦めします。</td>
+</tr>
+<tr>
+<td>発表</td>
+<td>システムテスト自動化カンファレンス2014</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://www.slideshare.net/k_suzuki/1sta-stac2014">http://www.slideshare.net/k_suzuki/1sta-stac2014</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.3</th>
+<th>システムテスト自動化 標準ガイド</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>テスト自動化に取り組むにあたり、必要となる知識・情報を体系的・網羅的に扱った一冊。ボリュームはあるものの、真剣にテスト自動化に取り組むのであれば必読です。</td>
+</tr>
+<tr>
+<td>出版</td>
+<td>翔泳社</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://www.shoeisha.co.jp/book/detail/9784798139210">http://www.shoeisha.co.jp/book/detail/9784798139210</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-">3. どんなテストツールがあるか知りたい</h4>
+<table>
+<thead>
+<tr>
+<th>No.4</th>
+<th>現場ですぐ使えるソフトウェアテストツール</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>多くのテストツールの中から、Java、Webアプリケーションに対応したものを中心に、現場で利用し易いフリーのツールに限定して紹介。テストツールについての知識が少ない方は、まずはこの資料に目を通してみることをお薦めします。</td>
+</tr>
+<tr>
+<td>発表</td>
+<td>ソフトウェアテストシンポジウム 2011 四国</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://www.jasst.jp/archives/jasst11t/pdf/s1.pdf">http://www.jasst.jp/archives/jasst11t/pdf/s1.pdf</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.5</th>
+<th>テストツールまるわかりガイド(入門編)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>テストツールについて体系的・網羅的に扱った資料。単なるツールの紹介に留まらず、&quot;テスト&quot;についての体系的な知識・理解を得ることもできる資料となっています。「あなたのプロジェクト 健康診断」や「テストツールマップ」など便利なツールも用意されていますので、ぜひご利用ください。</td>
+</tr>
+<tr>
+<td>発表</td>
+<td>NPO法人 ソフトウェアテスト技術振興協会</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://www.aster.or.jp/business/testtool_wg/pdf/Testtool_beginningGuide_Version1.0.0.pdf">http://www.aster.or.jp/business/testtool_wg/pdf/Testtool_beginningGuide_Version1.0.0.pdf</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-">4. テスト自動化に取り組んでいるものの上手くいっていない</h4>
+<table>
+<thead>
+<tr>
+<th>No.6</th>
+<th>テスト自動化のパターンと実践</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>テスト自動化は難しく、みんなが共通してハマる罠・&quot;あるある&quot;が結構あります。テスト自動化に取り組んでいる人たちの経験をアクセスしやすい形で公開しよう。というプロジェクト活動についての紹介と、代表的なパターンを紹介した資料。<br>※こちらの資料で興味がわいた方は、是非後述のサイト[テスト自動化パターン言語プロジェクト]にもアクセスしてください。</td>
+</tr>
+<tr>
+<td>発表</td>
+<td>システムテスト自動化カンファレンス2014</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://www.slideshare.net/Posaune/ss-42682479">http://www.slideshare.net/Posaune/ss-42682479</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.7</th>
+<th>テスト自動化パターン言語プロジェクト</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>テスト自動化の暗黙知について、パターン言語へとまとめる試みを行っているプロジェクト。テスト自動化の推奨パターン・アンチパターン・良くある落とし穴などが、わかりやすいキーワードで語られています。現場への導入・運用に苦労している方は、自分のプロジェクトがアンチパターンにハマっていないか、確認してみてはいかがでしょう？</td>
+</tr>
+<tr>
+<td>発表</td>
+<td>テスト自動化パターン言語プロジェクト</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://kencolle.github.io/AutomationPatternLanguage/">http://kencolle.github.io/AutomationPatternLanguage/</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.8</th>
+<th>よりよいテスト自動化のためにちょっと考えてみませんか？～スコープ、ROI、プロセスを中心に～</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>単なる&quot;テスト自動化&quot;ではなく、&quot;<strong>よい</strong>テスト自動化&quot;を達成するための、考え方やヒントが語られています。テスト自動化ができているという方にも一読頂きたい資料です。</td>
+</tr>
+<tr>
+<td>発表</td>
+<td>システムテスト自動化カンファレンス2013</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://www.slideshare.net/omn/stac2013-openingkoukai">http://www.slideshare.net/omn/stac2013-openingkoukai</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="5-">5. テスト自動化について勉強したい</h4>
+<table>
+<thead>
+<tr>
+<th>No.9</th>
+<th>システムテスト自動化カンファレンス</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>テスト自動化研究会(STAR: Software Test Automation Research Group Jp)の旗艦イベント。<br><br><i><strong>システムテストの自動化に関する正しい知識とノウハウを共有し、ゲンバを進化させよう。</strong></i><br><br>をテーマにした、システムテストの自動化に特化したイベントです。<br>過去の発表資料はどれも有益なものばかりですので、ぜひ一通り目を通してみてください。</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="https://sites.google.com/site/testautomationresearch/event">https://sites.google.com/site/testautomationresearch/event</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.10</th>
+<th>ソフトウェアテストシンポジウム</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>NPO法人 ソフトウェアテスト技術振興協会（ASTER:Association of Software Test EngineeRing）主催のイベント。<br>ソフトウェア業界全体のテスト技術力の向上と、進化した技術や知識の普及をテーマに、ソフトウェアテスト全般を扱ったシンポジウムで、歴史も古く老舗といえると思います。<br>テスト自動化に関連した研究発表も当然ありますが、それ以外にも、テスト技術者としてのスキルアップに繋がる研究発表も多く残されています。<br>過去の発表資料は膨大なので、まずはご自身が興味を惹かれるものから、少しずつ目を通していくとよいと思います。</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://www.jasst.jp/">http://www.jasst.jp/</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.11</th>
+<th>ソフトウェア品質シンポジウム</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>財団法人 日本科学技術連盟に設置されたSQiPソフトウェア品質委員会(SQiP:Software Quality Profession)主催のイベント。<br>ソフトウェア品質に関する実践的な技術・経験・研究成果を共有し、意見交換を行う場として設定されたシンポジウムです。<br>&quot;品質&quot;というテーマを基軸としつつ、多種多様な研究発表が残されており、新しい視点を与えてくれるのではないかと思います。</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="https://www.juse.jp/sqip/symposium/">https://www.juse.jp/sqip/symposium/</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.12</th>
+<th>テスト自動化研究会</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>テスト自動化研究会(STAR: Software Test Automation Research Group Jp)へようこそ。<br><br>本会では、ソフトウェアテスティングにおける重要な実践技術である<br>「テスト自動化」(特に上層、システムテスト/受け入れテスト)について、<br>技術領域の定義と啓蒙、およびそれを主たる価値とする<br>「テスト自動化エンジニア」(Automator)という職業の国内における創造を推進しています。<br>([ようこそ] より)</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="https://sites.google.com/site/testautomationresearch/">https://sites.google.com/site/testautomationresearch/</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.13</th>
+<th>ソフトウェアテスト技術振興協会</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>特定非営利活動法人（NPO法人）ソフトウェアテスト技術振興協会（ASTER:Association of Software Test EngineeRing）を2006年4月に設立しました。 ASTERは、ソフトウェアテストシンポジウム（JaSST）をはじめとする、ソフトウェア品質向上に関する教育や調査研究、普及振興事業を行います。 これらの事業を通して、ソフトウェア品質向上に関する社会教育の推進および専門能力の開発を実現します。 最終的には、社会全体で品質が高いソフトウェアの流通と活用がなされることで高度情報化社会の発展に寄与することを目的としています。<br>([NPO ASTER 設立のご挨拶] より)</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://aster.or.jp/">http://aster.or.jp/</a></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>No.14</th>
+<th>ソフトウェア品質委員会</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>概要</td>
+<td>実践的で実証的なソフトウェア品質技術・施策の研究・普及を目的として、日本科学技術連盟の下に設置されたソフトウェア品質向上のための活動です。 SQiPは、「ソフトウェア品質を良くしたい」という思いを共有する方なら、誰でも参加できるオープンな場です。<br>([SQiPとは] より)</td>
+</tr>
+<tr>
+<td>Link</td>
+<td><a href="http://juse.or.jp/sqip/index.html">http://juse.or.jp/sqip/index.html</a></td>
+</tr>
+</tbody>
+</table></body>
+</html>
